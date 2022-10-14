@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Actions\Post\StorePostActions;
+use App\Actions\Post\UpdatePostActions;
 use App\Http\Requests\PostStoreRequest;
+use App\Http\Requests\PostUpdateRequest;
 use App\Repositories\Post\ColeccionsPostsRepositories;
 use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Http\JsonResponse;
@@ -35,17 +37,14 @@ class PostController extends Controller
         );
     }
 
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+    public function update(string $idPost, PostUpdateRequest $request,)
     {
-        //
+        $create = UpdatePostActions::execute($idPost, $request->validated());
+        return response()->json(
+            ['data' =>  $create,
+            'staus' =>  "200" ],
+            Response::HTTP_OK
+        );
     }
 
     /**
