@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Actions\Post\DeletePostActions;
 use App\Actions\Post\StorePostActions;
 use App\Actions\Post\UpdatePostActions;
 use App\Http\Requests\PostStoreRequest;
@@ -37,7 +38,7 @@ class PostController extends Controller
         );
     }
 
-    public function update(string $idPost, PostUpdateRequest $request,)
+    public function update(string $idPost, PostUpdateRequest $request): JsonResponse
     {
         $create = UpdatePostActions::execute($idPost, $request->validated());
         return response()->json(
@@ -47,14 +48,14 @@ class PostController extends Controller
         );
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
+    public function destroy(string $idPost): JsonResponse
     {
-        //
+        $create = DeletePostActions::execute($idPost);
+
+        return response()->json(
+            ['data' =>  $create,
+            'staus' =>  "200" ],
+            Response::HTTP_OK
+        );
     }
 }
