@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Actions\Post\StorePostActions;
+use App\Http\Requests\PostStoreRequest;
 use App\Repositories\Post\ColeccionsPostsRepositories;
+use Symfony\Component\HttpFoundation\Response;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
@@ -19,51 +22,19 @@ class PostController extends Controller
     public function index(): JsonResponse
     {
         return response()->json($this->coleccionPosts->allPost());
-
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function store(PostStoreRequest $request): JsonResponse
     {
-        //
+        $createOrderPlate = StorePostActions::execute($request->validated());
+
+        return response()->json(
+            ['data' =>  $createOrderPlate,
+            'staus' =>  "200" ],
+            Response::HTTP_OK
+        );
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
 
     /**
      * Update the specified resource in storage.
