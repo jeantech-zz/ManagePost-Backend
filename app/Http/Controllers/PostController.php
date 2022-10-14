@@ -2,18 +2,23 @@
 
 namespace App\Http\Controllers;
 
+use App\Repositories\Post\ColeccionsPostsRepositories;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+
+    public function __construct(
+        private ColeccionsPostsRepositories $coleccionPosts
+    )
     {
-        //
+        $this->coleccionPosts = new ColeccionsPostsRepositories;
+    }
+
+    public function index(): Collection
+    {
+       return  $orders = $this->coleccionPosts->allPost();
     }
 
     /**
