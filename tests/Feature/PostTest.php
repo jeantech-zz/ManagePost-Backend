@@ -6,7 +6,6 @@ use App\Actions\Post\DeletePostActions;
 use App\Actions\Post\StorePostActions;
 use App\Actions\Post\UpdatePostActions;
 use App\Models\Post;
-use App\Repositories\Post\ColeccionsPostsRepositories;
 use Tests\TestCase;
 
 class PostTest extends TestCase
