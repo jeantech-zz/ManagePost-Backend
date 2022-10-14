@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Repositories\Post\ColeccionsPostsRepositories;
-use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -16,9 +16,10 @@ class PostController extends Controller
         $this->coleccionPosts = new ColeccionsPostsRepositories;
     }
 
-    public function index(): Collection
+    public function index(): JsonResponse
     {
-       return  $orders = $this->coleccionPosts->allPost();
+        return response()->json($this->coleccionPosts->allPost());
+
     }
 
     /**

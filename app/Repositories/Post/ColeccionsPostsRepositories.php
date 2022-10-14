@@ -9,7 +9,7 @@ class ColeccionsPostsRepositories implements PostsRepositories
 
     public function allPost ()
     {
-        return   Post::all();
+        return  Post::all();
     }
 
 }
