@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Actions\Post\DeletePostActions;
 use App\Actions\Post\StorePostActions;
 use App\Actions\Post\UpdatePostActions;
 use App\Models\Post;
@@ -72,5 +73,23 @@ class PostTest extends TestCase
 
         $response->assertStatus(200);
     }
+
+    public function test_post_actions_delete(): void
+    {
+        $idPost = Post::first();
+
+        $create = DeletePostActions::execute($idPost->id);
+        $this->assertSame((int)$create,  1);
+    }
+
+    public function test_post_delete_screen_can_be_rendered(): void
+    {
+        $idPost = Post::first();
+       $response = $this->deleteJson('/api/posts/' .$idPost->id);
+
+        $response->assertStatus(200);
+    }
+
+
 }
 
