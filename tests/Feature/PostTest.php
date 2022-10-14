@@ -2,9 +2,7 @@
 
 namespace Tests\Feature;
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Foundation\Testing\WithFaker;
-use Illuminate\Testing\Fluent\AssertableJson;
+use App\Actions\Post\StorePostActions;
 use Tests\TestCase;
 
 class PostTest extends TestCase
@@ -16,4 +14,18 @@ class PostTest extends TestCase
         $response->assertStatus(200);
     }
 
+    public function test_post_actions_store(): void
+    {
+        $data = [
+                "creator" => "andrea",
+                "title" => "nuevo",
+                "description" => "fasfda",
+                "photo" => "fad"
+        ];
+
+        $create = StorePostActions::execute($data);
+        $this->assertSame((string)$create->title,  "nuevo");
+    }
+
 }
+
