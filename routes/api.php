@@ -21,4 +21,5 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::name('api.')->group(function () {
     Route::apiResource('posts', PostController::class)->only(['index', 'store', 'update', 'destroy']);
+    Route::get('/postShow/{idPost}', [PostController::class, 'postShow'])->name('postShow');
 });
