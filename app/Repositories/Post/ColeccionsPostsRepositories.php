@@ -12,4 +12,9 @@ class ColeccionsPostsRepositories implements PostsRepositories
         return  Post::all();
     }
 
+    public function postId (string $idPost)
+    {
+        return  Post::find($idPost);
+    }
+
 }

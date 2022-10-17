@@ -12,7 +12,6 @@ class UpdatePostActions
         $postRecord =  Post::find($idPost);
 
         $record = $postRecord->update([
-            'creator' => $data['creator'],
             'title' => $data['title'],
             'description' => $data['description'],
             'photo' => $data['photo'],

@@ -58,4 +58,10 @@ class PostController extends Controller
             Response::HTTP_OK
         );
     }
+
+
+    public function postShow(string $idPost): JsonResponse
+    {
+        return response()->json($this->coleccionPosts->postId($idPost));
+    }
 }

@@ -8,8 +8,14 @@ class StorePostActions
 {
     public static function execute(array $data)//: Post
     {
+        $user_id=auth()->id();
+        if($user_id==null)
+        {
+            $user_id="default";
+        }
+
         $post = Post::create([
-            'creator' => $data['creator'],
+            'creator' => $user_id,
             'title' => $data['title'],
             'description' => $data['description'],
             'photo' => $data['photo'],
